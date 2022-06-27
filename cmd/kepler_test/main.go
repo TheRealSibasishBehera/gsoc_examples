@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	"syscall"
+
 	"github.com/containers/podman/v3/pkg/bindings"
 	"github.com/containers/podman/v3/pkg/bindings/containers"
 	"github.com/containers/podman/v3/pkg/domain/entities"
-	"syscall"
 
 	"log"
 )
@@ -63,7 +64,7 @@ func main() {
 	for _, container := range conList {
 		cgroupPath := GetCGroupPathFromContainerID(ctx, container.ID)
 		inode_num := GetInodefOfCGroup("/sys/fs/cgroup" + cgroupPath)
-		fmt.Printf("\nCGroup of contianer %s is having image %s started on %s : %s\n\n", container.Names, container.Image, container.Created, cgroupPath)
+		fmt.Printf("\nCGroup : %s image:  %s Time: %s : ID : %s\n\n", cgroupPath, container.Image, container.Created, container.Names, container.ID)
 		fmt.Println("Inode Number of cgroup path is ", inode_num)
 		//fmt.Println(container.Names)
 
