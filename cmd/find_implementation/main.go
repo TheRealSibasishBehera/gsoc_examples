@@ -38,12 +38,18 @@ func getPathFromcGroupID(cgroupId uint64) (string, error) {
 			return nil
 		}
 		handle, _, err := unix.NameToHandleAt(unix.AT_FDCWD, path, 0)
-		// fmt.Println(handle)
+		fmt.Println(handle)
 		if err != nil {
 			return fmt.Errorf("error resolving handle: %v", err)
 		}
-		cGroupIDToPath[byteOrder.Uint64(handle.Bytes())] = path
-		// fmt.Println(byteOrder.Uint64(handle.Bytes()))
+		// cGroupIDToPath[byteOrder.Uint64(handle.Bytes())] = path
+		// if handle == nil {
+		// 	return nil
+		// }
+		fmt.Println(handle.Type())
+		fmt.Println(handle.Bytes())
+		fmt.Println(path)
+		fmt.Println(byteOrder.Uint64(handle.Bytes()))
 		return nil
 	})
 
@@ -83,6 +89,6 @@ func getPathFromcGroupID2(cgroupId uint64) (string, error) {
 }
 func main() {
 
-	getPathFromcGroupID2(23480)
+	getPathFromcGroupID(29066)
 
 }
