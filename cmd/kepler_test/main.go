@@ -63,10 +63,11 @@ func main() {
 	conList := conlister.ListContainers(*ctx)
 	for _, container := range conList {
 		cgroupPath := GetCGroupPathFromContainerID(ctx, container.ID)
-		inode_num := GetInodefOfCGroup("/sys/fs/cgroup" + cgroupPath)
+		inode_num := GetInodefOfCGroup("/sys/fs/cgroup" + cgroupPath + "/container")
 		fmt.Printf("\nCGroup : %s image:  %s Time: %s : ID : %s\n\n", cgroupPath, container.Image, container.Created, container.Names, container.ID)
 		fmt.Println("Inode Number of cgroup path is ", inode_num)
 		//fmt.Println(container.Names)
 
+		fmt.Println("working")
 	}
 }
